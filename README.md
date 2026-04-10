@@ -13,6 +13,7 @@ It packages the app in a number of formats:
 - `rpm` (Fedora, Red Hat, CentOS, openSUSE, ...)
 - `deb` (Debian, Ubuntu, Pop!\_OS, elementary OS, ...)
 - `tar.xz` to install anywhere else
+- Nix
 
 ## Star History
 
@@ -24,7 +25,26 @@ Special thanks to [SibrenVasse](https://github.com/SibrenVasse) who made the [or
 
 You can find all of the packages on [the release page](https://github.com/aunetx/deezer-linux/releases/latest).
 
+### Flatpak
+
 To install the flatpak version, you can simply go to https://flathub.org/apps/dev.aunetx.deezer (or use your favorite flatpak package manager).
+
+### Nix
+
+To install the [Nix version](https://search.nixos.org/packages?query=deezer-desktop&show=deezer-desktop) available in `unstable` and current releases, you can use:
+```sh
+nix-shell -p deezer-desktop
+```
+Or, to install it permanently, add it to your `configuration.nix` or Flakes:
+```nix
+{
+  environment.systemPackages = with pkgs; [
+    deezer-desktop
+  ];
+}
+```
+
+### Other packages
 
 Other packages can be installed from your package manager, either by clicking on them or from the command-line.
 
@@ -67,6 +87,7 @@ Other packages can be installed from your package manager, either by clicking on
 | tar.xz   | ⚠️    | ✅  |
 | snap     | ⚠️    | ✅  |
 | flatpak  | ⚠️    | ✅  |
+| nix      | ✅    | ✅  |
 
 ✅ Available ; ⚠️ Not tested ; ❌ Not available ; ⛔ Not planned
 
@@ -185,6 +206,21 @@ To run it, you can use:
 
 ```sh
 flatpak run dev.aunetx.deezer
+```
+
+### Nix
+
+To build the `nix` package, you can use:
+
+```sh
+nix-shell # Temporarily install dependencies from shell.nix in a shell
+make install_deps
+make build_nix_{arch}
+```
+
+To run it, you can use:
+```sh
+./artifacts/{arch}/nix-result/bin/deezer-desktop
 ```
 
 ## Development
