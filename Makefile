@@ -114,12 +114,13 @@ build_flatpak_arm64:
 
 build_nix_x64: 
 	@echo "Build Nix package"
-	@$(PACKAGE_MANAGER) $(PACKAGE_MANAGER_SUBDIR_ARG) $(APP_DIR) run prepare-nix
+	@$(PACKAGE_MANAGER) $(PACKAGE_MANAGER_SUBDIR_ARG) $(APP_DIR) run prepare-nix -- --x64
 	@nix-build -A deezer-desktop --argstr pkgVer "$(PKGVER)" --argstr arch "x64" --out-link ./artifacts/x64/nix-result
 
 build_nix_arm64: 
 	@echo "Build Nix package"
-	@$(PACKAGE_MANAGER) $(PACKAGE_MANAGER_SUBDIR_ARG) $(APP_DIR) run prepare-nix
+	@uname -m | grep -Eq 'arm64|aarch64' || { echo "The arm64 Nix target requires a native arm64 host."; exit 1; }
+	@$(PACKAGE_MANAGER) $(PACKAGE_MANAGER_SUBDIR_ARG) $(APP_DIR) run prepare-nix -- --arm64
 	@nix-build -A deezer-desktop --argstr pkgVer "$(PKGVER)" --argstr arch "arm64" --out-link ./artifacts/arm64/nix-result
 
 #! DEV

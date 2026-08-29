@@ -7,7 +7,7 @@
 
 let
 
-  src = ./. + "/artifacts/${arch}/linux-unpacked";
+  src = ./. + "/artifacts/${arch}/linux${lib.optionalString (arch != "x64") "-${arch}"}-unpacked";
 
   deezer-desktop = pkgs.stdenv.mkDerivation (finalAttrs: {
     pname = "deezer-desktop";

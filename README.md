@@ -70,7 +70,7 @@ After installing, launch **Deezer** from your applications menu, or from a termi
 | -------------------- | ------------------------------------------------------------------- |
 | Flatpak              | `flatpak run dev.aunetx.deezer`                                     |
 | Snap                 | `deezer-desktop`                                                    |
-| Nix                  | `deezer-desktop` or `nix-shell -p deezer-desktop`                   |
+| Nix                  | `deezer-desktop` or `nix run nixpkgs#deezer-desktop`                |
 | `.deb` / `.rpm`      | `deezer-desktop`                                                    |
 | `.tar.xz` / AppImage | `./deezer-desktop` (from the extracted folder or the AppImage file) |
 
